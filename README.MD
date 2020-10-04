@@ -1,5 +1,8 @@
 # Publish-Subscribe using RSocket protocol
 
+thanks to @Olegz and @spencergibb
+https://www.youtube.com/watch?v=XWgXwpQ3dU4&t=1697s
+
 ### RSocket
  is a bi-directional message based binary application level protocol.
  It can be transported using tcp, websocket and ... .
