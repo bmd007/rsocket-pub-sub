@@ -26,40 +26,11 @@ public class RSocketPublisher {
     @Autowired
     EventPublisher<String> eventPublisher;
 
-//    Mono<RSocketRequester> rSocketRequester = RSocketRequester.builder()
-//            .connectTcp("localhost", 7557);
-
     @EventListener
     public void handleContextRefreshEvent(ApplicationStartedEvent startedEvent) throws InterruptedException {
         Flux.interval(Duration.ofSeconds(3))
                 .map(String::valueOf)
                 .subscribe(aLong -> eventPublisher.publish(aLong));
-
-//        rSocketRequester
-//                .flatMapMany(requester -> requester
-//                        .route(RoutingFunction.FUNCTION_NAME)
-//                        .metadata("{\"func\":\"events\"}", MimeTypeUtils.APPLICATION_JSON)
-//                        .data("mahdi")
-//                        .retrieveFlux(String.class))
-//                .subscribe(System.out::println);
-//
-//        Thread.sleep(5000);
-//        rSocketRequester
-//                .flatMapMany(requester -> requester
-//                        .route(RoutingFunction.FUNCTION_NAME)
-//                        .metadata("{\"func\":\"events\"}", MimeTypeUtils.APPLICATION_JSON)
-//                        .data("aboli")
-//                        .retrieveFlux(String.class))
-//                .subscribe(System.out::println);
-//
-//
-//        rSocketRequester
-//                .flatMap(requester -> requester
-//                        .route(RoutingFunction.FUNCTION_NAME)
-//                        .metadata("{\"func\":\"echo\"}", MimeTypeUtils.APPLICATION_JSON)
-//                        .data("mahdiiiiiiiiii")
-//                        .retrieveMono(String.class))
-//                .subscribe(System.out::println);
     }
 
     @Bean
