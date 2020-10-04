@@ -1,8 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'org.springframework.boot' version '2.4.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
+
 
 group = 'wonderland.rsocket'
 version = '0.0.1-SNAPSHOT'
@@ -16,15 +17,20 @@ configurations {
 
 repositories {
 	mavenCentral()
-	maven { url "https://repo.spring.io/milestone" }
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://oss.jfrog.org/oss-snapshot-local' }
+}
+
+ext {
+	set('springCloudVersion', "2020.0.0-SNAPSHOT")
 }
 
 dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	implementation 'io.projectreactor:reactor-core:3.4.0-RC1'
 	implementation'io.projectreactor.addons:reactor-extra:3.3.4.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.cloud:spring-cloud-function-rsocket:3.1.0-M4'
+	implementation 'org.springframework.cloud:spring-cloud-function-rsocket:3.1.0-SNAPSHOT'
 	implementation 'io.rsocket.routing:rsocket-routing-client-spring:0.1.0'
 
 
