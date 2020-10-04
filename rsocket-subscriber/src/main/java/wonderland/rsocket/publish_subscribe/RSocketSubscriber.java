@@ -1,26 +1,19 @@
 package wonderland.rsocket.publish_subscribe;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.cloud.function.context.config.RoutingFunction;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.rsocket.RSocketRequester;
-import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-import java.util.function.Function;
-
 @SpringBootApplication
-public class RSocketPublisher {
+public class RSocketSubscriber {
 
     public static void main(String[] args) {
-        SpringApplication.run(RSocketPublisher.class, args);
+        SpringApplication.run(RSocketSubscriber.class, args);
     }
 
     Mono<RSocketRequester> rSocketRequester = RSocketRequester.builder()
