@@ -1,13 +1,12 @@
 package wonderland.rsocket.publish_subscribe;
 
+import io.rsocket.routing.client.spring.RoutingMetadata;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.cloud.function.context.config.RoutingFunction;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.rsocket.RSocketRequester;
-import org.springframework.util.MimeTypeUtils;
-import reactor.core.publisher.Mono;
+
 
 @SpringBootApplication
 public class RSocketSubscriber {
@@ -16,36 +15,37 @@ public class RSocketSubscriber {
         SpringApplication.run(RSocketSubscriber.class, args);
     }
 
-    Mono<RSocketRequester> rSocketRequester = RSocketRequester.builder()
-            .connectTcp("localhost", 7557);
+    private final RSocketRequester rSocketRequester;
+    private final RoutingMetadata metadata;
+
+    public RSocketSubscriber(RSocketRequester requester, RoutingMetadata metadata) {
+        this.rSocketRequester = requester;
+        this.metadata = metadata;
+    }
 
     @EventListener
-    public void handleContextRefreshEvent(ApplicationStartedEvent startedEvent) throws InterruptedException {
+    public void onStart(ApplicationReadyEvent event) throws InterruptedException {
         rSocketRequester
-                .flatMapMany(requester -> requester
-                        .route(RoutingFunction.FUNCTION_NAME)
-                        .metadata("{\"func\":\"events\"}", MimeTypeUtils.APPLICATION_JSON)
+                        .route("events")
+                        .metadata(metadata.address("rsocket-publisher"))
                         .data("mahdi")
-                        .retrieveFlux(String.class))
+                        .retrieveFlux(String.class)
                 .subscribe(System.out::println);
 
         Thread.sleep(5000);
 
-        rSocketRequester
-                .flatMapMany(requester -> requester
-                        .route(RoutingFunction.FUNCTION_NAME)
-                        .metadata("{\"func\":\"events\"}", MimeTypeUtils.APPLICATION_JSON)
+        rSocketRequester.route("events")
+                        .metadata(metadata.address("rsocket-publisher"))
                         .data("aboli")
-                        .retrieveFlux(String.class))
+                        .retrieveFlux(String.class)
                 .subscribe(System.out::println);
 
+        Thread.sleep(5000);
 
-        rSocketRequester
-                .flatMap(requester -> requester
-                        .route(RoutingFunction.FUNCTION_NAME)
-                        .metadata("{\"func\":\"echo\"}", MimeTypeUtils.APPLICATION_JSON)
+        rSocketRequester.route("echo")
+                        .metadata(metadata.address("rsocket-publisher"))
                         .data("mahdiiiiiiiiii")
-                        .retrieveMono(String.class))
+                        .retrieveMono(String.class)
                 .subscribe(System.out::println);
     }
 

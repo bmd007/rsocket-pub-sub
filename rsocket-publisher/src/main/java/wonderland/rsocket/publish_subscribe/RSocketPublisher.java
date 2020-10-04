@@ -3,6 +3,7 @@ package wonderland.rsocket.publish_subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.cloud.function.context.config.RoutingFunction;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +28,7 @@ public class RSocketPublisher {
     EventPublisher<String> eventPublisher;
 
     @EventListener
-    public void handleContextRefreshEvent(ApplicationStartedEvent startedEvent) throws InterruptedException {
+    public void onStart(ApplicationReadyEvent event) {
         Flux.interval(Duration.ofSeconds(3))
                 .map(String::valueOf)
                 .subscribe(aLong -> eventPublisher.publish(aLong));
