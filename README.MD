@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=XWgXwpQ3dU4&t=1697s
  connect to. Then what ever request they have, they only need to know a couple of names to get the results through the 
  broker which has an ongoing connection to all the (other) parties.
  
- ##Publish-Subscribe
+ ## Publish-Subscribe
  Infinite number of publishers can connect to RSocket-Broker and expose "APIs" (Streams ready to be subscribed).
  They can be different instances of same application. Infinite number of subscribers can also connect to the RSocker-Broker (doesn't need to be intances of same application).
  Then clients need to know the name of application they want to get data from (in the simplest form) and name of a function (which is eqiuvalent to name of a topic).
