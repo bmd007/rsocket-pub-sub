@@ -29,7 +29,7 @@ dependencies {
 	implementation'io.projectreactor.addons:reactor-extra:3.5.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.cloud:spring-cloud-function-rsocket:3.2.8'
-	implementation 'io.rsocket.routing:rsocket-routing-client-spring:0.1.0'
+	implementation 'io.rsocket.routing:rsocket-routing-client-spring:0.2.0'
 
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
