@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '3.0.1'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'java'
+	id 'idea'
 }
 
 
@@ -37,6 +38,10 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('wrapper') {
+	distributionType = Wrapper.DistributionType.ALL
 }
