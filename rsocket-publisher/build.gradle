@@ -28,7 +28,7 @@ ext {
 
 dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	implementation'io.projectreactor.addons:reactor-extra:3.3.4.RELEASE'
+	implementation'io.projectreactor.addons:reactor-extra:3.5.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.cloud:spring-cloud-function-rsocket:3.1.0-SNAPSHOT'
 	implementation 'io.rsocket.routing:rsocket-routing-client-spring:0.1.0'
