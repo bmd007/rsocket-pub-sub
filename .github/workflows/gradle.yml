@@ -29,16 +29,16 @@ jobs:
         java-version: '19'
         distribution: 'temurin'
         
-    - name: Build api-gateway 
+    - name: Build rsocket-publisher
       working-directory: ./rsocket-publisher
       run: ./gradlew clean build    
       
         
-    - name: Build api-gateway 
+    - name: Build rsocket-subscriber
       working-directory: ./rsocket-subscriber
       run: ./gradlew clean build   
       
               
-    - name: Build api-gateway 
+    - name: Build rsocket-publisher
       working-directory: ./rsocket-publisher
       run: ./gradlew clean build   
